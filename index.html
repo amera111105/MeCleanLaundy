@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeClean - Laundry Cepat & Terpercaya 🧸✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* PALET WARNA */
+            --bg-gradient: linear-gradient(180deg, #E0F7FA 0%, #FFFFFF 50%, #F1F8E9 100%);
+            --white: #FFFFFF;
+            --pink-accent: #FF9EBB;
+            --teal-main: #009688;
+            --text-dark: #37474F;
+            --text-light: #78909C;
+            --shadow-card: 0 15px 35px rgba(0, 150, 136, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Quicksand', sans-serif; scroll-behavior: smooth; }
+        
+        body { 
+            background: var(--bg-gradient); 
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            padding: 15px 5%; position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--teal-main); letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;}
+        .logo span { color: var(--pink-accent); } 
+        
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 700; transition: 0.3s; font-size: 1rem; }
+        .nav-links a:hover { color: var(--teal-main); }
+
+        .cart-btn-wrap {
+            background: white; padding: 8px 20px; border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer;
+            border: 2px solid var(--teal-main); transition: 0.3s;
+            display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text-dark);
+        }
+        .cart-btn-wrap:hover { transform: scale(1.05); background: var(--teal-main); color: white; }
+        .badge { background: var(--pink-accent); color: white; padding: 2px 8px; border-radius: 50%; font-size: 0.8rem; }
+
+        /* --- COMPONENTS --- */
+        section { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; }
+        .section-title p { color: var(--text-light); font-weight: 600; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        .btn-blob {
+            background: var(--pink-accent); color: white; padding: 15px 40px; border-radius: 50px;
+            text-decoration: none; font-weight: 700; font-size: 1.1rem; border: none; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 158, 187, 0.4); transition: 0.3s; display: inline-block;
+        }
+        .btn-blob:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(255, 158, 187, 0.6); background: #FF80AB; }
+
+        /* --- HERO --- */
+        .hero { display: flex; align-items: center; justify-content: space-between; min-height: 90vh; position: relative; }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; color: var(--text-dark); font-weight: 800; }
+        .hero-text h1 span { color: var(--pink-accent); }
+        .hero-object img { width: 100%; max-width: 500px; animation: bounce 3s infinite ease-in-out; filter: drop-shadow(0 25px 50px rgba(0, 150, 136, 0.2)); }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* --- DELIVERY BANNER --- */
+        .delivery-banner {
+            background: var(--teal-main); color: white; border-radius: 40px; padding: 60px 5%;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 20px 40px rgba(0, 150, 136, 0.3); position: relative; overflow: hidden; margin: 0 2%;
+        }
+        .db-text { max-width: 600px; z-index: 2; }
+        .db-text h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .db-text p { font-size: 1.1rem; margin-bottom: 0; opacity: 0.9; line-height: 1.6; }
+        .db-img { width: 350px; z-index: 2; transform: rotate(-5deg); transition: 0.5s; }
+        .db-img:hover { transform: rotate(0deg) scale(1.05); }
+        .db-bg { position: absolute; top: 0; right: 0; width: 100%; height: 100%; opacity: 0.1; background: url('https://www.transparenttextures.com/patterns/cubes.png'); }
+
+        /* --- WHY US --- */
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .why-card {
+            background: white; padding: 40px 30px; border-radius: 30px; text-align: center;
+            box-shadow: var(--shadow-card); transition: 0.3s; border: 2px solid transparent;
+        }
+        .why-card:hover { transform: translateY(-10px); border-color: var(--teal-main); }
+        .why-icon { font-size: 3rem; color: var(--teal-main); margin-bottom: 20px; display: inline-block; padding: 20px; background: #E0F2F1; border-radius: 50%; }
+        .why-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; color: var(--text-dark); }
+        .why-card p { font-size: 1rem; color: var(--text-light); line-height: 1.6; }
+
+        /* --- LAYANAN (GRID) --- */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
+        .card-cute {
+            background: white; border-radius: 35px; padding: 30px; text-align: center;
+            box-shadow: var(--shadow-card); border: 2px solid white; transition: 0.3s; position: relative;
+            overflow: hidden;
+        }
+        .card-cute:hover { transform: translateY(-10px); border-color: var(--teal-main); }
+        .card-img { height: 100px; margin-bottom: 15px; }
+        .card-cute h3 { margin-bottom: 5px; font-weight: 800; }
+        .price { color: var(--teal-main); font-weight: 800; font-size: 1.2rem; display: block; margin-bottom: 15px; }
+        
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #F5F5F5; border-radius: 50px; padding: 5px; width: fit-content; margin: 0 auto 15px; }
+        .qty-btn { width: 30px; height: 30px; border-radius: 50%; border: none; background: white; cursor: pointer; color: var(--text-dark); font-weight: 800; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .qty-val { width: 30px; text-align: center; border: none; background: transparent; font-weight: 800; }
+
+        /* --- CART & MODAL --- */
+        .cart-sidebar { position: fixed; top: 0; right: -450px; width: 400px; height: 100vh; background: white; z-index: 10000; padding: 30px; box-shadow: -10px 0 50px rgba(0,0,0,0.1); transition: 0.4s; display: flex; flex-direction: column; }
+        .cart-sidebar.active { right: 0; }
+        .overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:9998; display:none; backdrop-filter: blur(5px); }
+        .data-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: white; padding: 40px; border-radius: 40px; width: 90%; max-width: 450px; z-index: 10002; opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 25px 50px rgba(0,0,0,0.2); text-align: center; border: 5px solid var(--teal-main); }
+        .data-modal.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: all; }
+        .form-input { width: 100%; padding: 15px; border: 2px solid #EEE; border-radius: 15px; font-family: 'Quicksand'; font-weight: 600; outline: none; transition: 0.3s; margin-bottom: 20px; }
+        .form-input:focus { border-color: var(--teal-main); background: #E0F2F1; }
+
+        /* --- FOOTER --- */
+        footer { background: white; padding-top: 60px; border-top: 5px solid #E0F2F1; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding: 0 5% 40px; }
+        .footer-item h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: var(--teal-main); }
+        .social-icons a { display: inline-block; width: 40px; height: 40px; background: #E0F2F1; color: var(--teal-main); text-align: center; line-height: 40px; border-radius: 50%; margin-right: 10px; transition: 0.3s; }
+        .social-icons a:hover { background: var(--pink-accent); color: white; transform: rotate(15deg); }
+        .copyright { text-align: center; padding: 20px; background: #FAFAFA; color: #BBB; font-size: 0.9rem; font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 100px; }
+            .nav-links { display: none; } 
+            .cart-sidebar { width: 100%; }
+            .delivery-banner { flex-direction: column; text-align: center; padding: 40px 20px; }
+            .db-img { margin-top: 30px; width: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="https://img.icons8.com/3d-fluency/94/washing-machine.png" width="40">
+            Me<span>Clean.</span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero">Beranda</a>
+            <a href="#services">Layanan</a>
+            <a href="#testimoni">Review</a>
+            <a href="#contact">Kontak</a>
+        </div>
+        <div class="cart-btn-wrap" onclick="toggleCart()">
+            <i class="fas fa-shopping-basket"></i>
+            <span id="badge" class="badge">0</span>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero">
+        <div class="hero-text">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: #FFF3E0; padding: 8px 15px; border-radius: 20px; margin-bottom: 20px; font-weight: 700; color: #F57C00; font-size: 0.9rem;">
+                <i class="fas fa-check-circle"></i> Laundry Pilihan Keluarga
+            </div>
+            <h1>Laundry Wangi,<br>Hati <span style="color: var(--pink-accent);">Happy!</span> 🌸</h1>
+            <p style="margin-bottom: 30px; font-weight: 600; color: #90A4AE; max-width: 500px;">
+                Cucian numpuk bikin pusing? Tenang bestie! Kami jemput, cuci bersih pakai bahan premium, dan antar lagi dalam keadaan wangi.
+            </p>
+            <a href="#services" class="btn-blob">Pesan Sekarang</a>
+        </div>
+        <div class="hero-object">
+            <img src="https://img.icons8.com/3d-fluency/512/washing-machine.png" alt="Laundry 3D">
+        </div>
+    </section>
+
+    <div class="delivery-banner">
+        <div class="db-bg"></div>
+        <div class="db-text">
+            <h2>Antar Jemput - Maksimal 30 Menit Dipickup! 🛵</h2>
+            <p>Kami memahami kenyamanan Anda adalah prioritas. Pesan lewat aplikasi/WA, kurir kami langsung meluncur mengambil cucian kotor Anda.</p>
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" class="db-img" alt="Delivery Scooter">
+    </div>
+
+    <section id="why">
+        <div class="section-title">
+            <h2>Mengapa Harus MeClean?</h2>
+            <p>Standar kualitas terbaik untuk pakaian kesayangan Anda</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Merk Terpercaya</h3>
+                <p>Sudah dipercaya oleh ribuan pelanggan. Reputasi kami dibangun atas kepuasan dan kepercayaan Anda.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="fas fa-users"></i></div>
+                <h3>Tim Profesional</h3>
+                <p>Dilayani oleh tim berdedikasi dan terlatih. Menangani setiap pakaian dengan hati-hati dan penuh perhatian.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="fas fa-stopwatch"></i></div>
+                <h3>Express 3 Jam Selesai</h3>
+                <p>Butuh cepat? Layanan express kami menjamin cucian selesai dalam 3 jam tanpa mengurangi kualitas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-title">
+            <h2>Pilih Layanan</h2>
+            <p>Paket lengkap untuk segala kebutuhan kebersihanmu</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card-cute">
+                <img src="https://cdn-icons-png.flaticon.com/512/3322/3322056.png" class="card-img">
+                <h3>Cuci Komplit (Kiloan)</h3>
+                <span class="price">Rp 6.000 /kg</span>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty('kiloan', -1)">-</button>
+                    <input type="number" id="qty-kiloan" class="qty-val" value="1" min="1">
+                    <button class="qty-btn" onclick="changeQty('kiloan', 1)">+</button>
+                </div>
+                <button class="btn-blob" style="width: 100%; padding: 10px; font-size: 0.9rem;" onclick="addCart('kiloan', 'Cuci Komplit', 6000, 'kg')">Tambah +</button>
+            </div>
+
+            <div class="card-cute">
+                <img src="https://cdn-icons-png.flaticon.com/512/2954/2954897.png" class="card-img">
+                <h3>Bedcover Besar</h3>
+                <span class="price">Rp 25.000 /pcs</span>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty('bc', -1)">-</button>
+                    <input type="number" id="qty-bc" class="qty-val" value="1" min="1">
+                    <button class="qty-btn" onclick="changeQty('bc', 1)">+</button>
+                </div>
+                <button class="btn-blob" style="width: 100%; padding: 10px; font-size: 0.9rem;" onclick="addCart('bc', 'Bedcover Besar', 25000, 'pcs')">Tambah +</button>
+            </div>
+
+            <div class="card-cute">
+                <img src="https://cdn-icons-png.flaticon.com/512/2589/2589903.png" class="card-img">
+                <h3>Cuci Sepatu</h3>
+                <span class="price">Rp 20.000 /psg</span>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty('sepatu', -1)">-</button>
+                    <input type="number" id="qty-sepatu" class="qty-val" value="1" min="1">
+                    <button class="qty-btn" onclick="changeQty('sepatu', 1)">+</button>
+                </div>
+                <button class="btn-blob" style="width: 100%; padding: 10px; font-size: 0.9rem;" onclick="addCart('sepatu', 'Cuci Sepatu', 20000, 'psg')">Tambah +</button>
+            </div>
+
+             <div class="card-cute">
+                <img src="https://cdn-icons-png.flaticon.com/512/3003/3003984.png" class="card-img">
+                <h3>Cuci Karpet</h3>
+                <span class="price">Rp 15.000 /m</span>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty('karpet', -1)">-</button>
+                    <input type="number" id="qty-karpet" class="qty-val" value="1" min="1">
+                    <button class="qty-btn" onclick="changeQty('karpet', 1)">+</button>
+                </div>
+                <button class="btn-blob" style="width: 100%; padding: 10px; font-size: 0.9rem;" onclick="addCart('karpet', 'Cuci Karpet', 15000, 'm')">Tambah +</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimoni" style="background: #E0F2F1;">
+        <div class="section-title">
+            <h2>Review Pelanggan 💬</h2>
+            <p>Apa kata mereka tentang kecepatan dan kebersihan MeClean?</p>
+        </div>
+        <div class="grid-container" style="margin-top:0;">
+            <div class="card-cute" style="text-align: left;">
+                <div style="color: #FFD700; margin-bottom: 10px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p style="font-style: italic; color: #666; margin-bottom: 15px;">"Gila sih, beneran 30 menit kurirnya udah sampe depan kostan. Cucian express 3 jam juga on time banget. Mantap!"</p>
+                <strong>— Kak Dina</strong>
+            </div>
+            <div class="card-cute" style="text-align: left;">
+                <div style="color: #FFD700; margin-bottom: 10px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p style="font-style: italic; color: #666; margin-bottom: 15px;">"Suka banget sama wanginya, ga bikin apek walau disimpen lama di lemari. Timnya juga ramah-ramah."</p>
+                <strong>— Ibu Ratna</strong>
+            </div>
+            <div class="card-cute" style="text-align: left;">
+                <div style="color: #FFD700; margin-bottom: 10px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <p style="font-style: italic; color: #666; margin-bottom: 15px;">"Stop nyuci sendiri bener banget slogannya haha. Mending serahin ke MeClean, baju bersih waktu luang banyak."</p>
+                <strong>— Mas Dimas</strong>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-item">
+                <h3>MeClean.</h3>
+                <p style="line-height: 1.6; color: #777;">Solusi laundry modern, bersih, dan higienis. Merawat pakaianmu dengan standar profesional.</p>
+                <div style="margin-top: 20px;" class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-item">
+                <h3>Hubungi Kami</h3>
+                <div style="display:flex; gap:10px; margin-bottom:15px; color:#555;"><i class="fas fa-map-marker-alt" style="color:var(--teal-main);"></i><span>Jl. Surya Kencana No. 12, Pamulang</span></div>
+                <div style="display:flex; gap:10px; margin-bottom:15px; color:#555;"><i class="fas fa-phone-alt" style="color:var(--teal-main);"></i><span>0812-3456-7890 (WA)</span></div>
+                <div style="display:flex; gap:10px; margin-bottom:15px; color:#555;"><i class="fas fa-clock" style="color:var(--teal-main);"></i><span>Senin - Sabtu: 07.00 - 21.00</span></div>
+            </div>
+            <div class="footer-item">
+                <h3>Area Layanan</h3>
+                <ul style="list-style: none; color: #777; line-height: 1.8;">
+                    <li>✅ Pamulang & Sekitarnya</li>
+                    <li>✅ Ciputat Timur</li>
+                    <li>✅ BSD City (Area Tertentu)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 MeClean Laundry. All Rights Reserved. 🫧
+        </div>
+    </footer>
+
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="sidebar">
+        <h2 style="margin-bottom: 20px; color: var(--teal-main);">Keranjang MeClean 🧺</h2>
+        <div id="cartItems" style="flex: 1; overflow-y: auto;"></div>
+        <div style="margin-top: 20px; border-top: 2px solid #EEE; padding-top: 20px;">
+            <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem; margin-bottom: 20px;">
+                <span>Total Estimasi:</span>
+                <span id="cartTotal" style="color: var(--pink-accent);">Rp 0</span>
+            </div>
+            <button class="btn-blob" style="width: 100%;" onclick="openCheckout()">Lanjut Pemesanan <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="overlay" id="formOverlay" style="z-index: 10001; display: none;" onclick="closeCheckout()"></div>
+    <div class="data-modal" id="dataModal">
+        <h2 style="margin-bottom: 10px; color: var(--text-dark);">Data Pemesan 📝</h2>
+        <p style="margin-bottom: 25px; font-size: 0.9rem; color: #999;">Isi data biar kurir MeClean gampang jemputnya</p>
+        
+        <label style="display:block; text-align:left; font-weight:700; margin-bottom:5px;">Nama Lengkap</label>
+        <input type="text" id="custName" class="form-input" placeholder="Contoh: Kak Sarah">
+        
+        <label style="display:block; text-align:left; font-weight:700; margin-bottom:5px;">Alamat Penjemputan</label>
+        <input type="text" id="custAddress" class="form-input" placeholder="Contoh: Jl. Mawar No. 10">
+        
+        <button class="btn-blob" style="width: 100%;" onclick="sendToWA()">Kirim ke WhatsApp <i class="fab fa-whatsapp"></i></button>
+        <button style="margin-top: 15px; background: none; border: none; color: #999; cursor: pointer; font-weight: 600;" onclick="closeCheckout()">Batal</button>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').style.display = document.getElementById('sidebar').classList.contains('active') ? 'block' : 'none';
+        }
+
+        function changeQty(id, delta) {
+            const el = document.getElementById('qty-' + id);
+            let val = parseInt(el.value) + delta;
+            if (val < 1) val = 1;
+            el.value = val;
+        }
+
+        function addCart(id, name, price, unit) {
+            const qty = parseInt(document.getElementById('qty-' + id).value);
+            const exist = cart.find(x => x.id === id);
+            if (exist) { exist.qty += qty; } else { cart.push({ id, name, price, unit, qty }); }
+            document.getElementById('qty-' + id).value = 1;
+            renderCart(); toggleCart(); 
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const badge = document.getElementById('badge');
+            const totalEl = document.getElementById('cartTotal');
+            container.innerHTML = ''; let total = 0; let count = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #BBB; margin-top: 50px;">Keranjang masih kosong nih.</p>';
+                badge.style.display = 'none'; totalEl.innerText = 'Rp 0'; return;
+            }
+
+            cart.forEach((item, idx) => {
+                total += item.price * item.qty; count += item.qty;
+                container.innerHTML += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; background: #F9F9F9; padding: 10px; border-radius: 15px;">
+                        <div>
+                            <div style="font-weight: 700;">${item.name}</div>
+                            <div style="font-size: 0.85rem; color: #888;">${item.qty} ${item.unit} x Rp ${item.price/1000}rb</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 800; color: var(--teal-main);">Rp ${(item.price * item.qty).toLocaleString()}</div>
+                            <div style="color: #FF5252; font-size: 0.8rem; cursor: pointer; margin-top: 5px;" onclick="delItem(${idx})">Hapus</div>
+                        </div>
+                    </div>`;
+            });
+            badge.style.display = 'block'; badge.innerText = count; totalEl.innerText = 'Rp ' + total.toLocaleString();
+        }
+
+        function delItem(idx) { cart.splice(idx, 1); renderCart(); }
+
+        function openCheckout() {
+            if (cart.length === 0) return alert("Keranjang kosong kak!");
+            document.getElementById('formOverlay').style.display = 'block';
+            document.getElementById('dataModal').classList.add('open');
+            toggleCart(); 
+        }
+
+        function closeCheckout() {
+            document.getElementById('formOverlay').style.display = 'none';
+            document.getElementById('dataModal').classList.remove('open');
+        }
+
+        function sendToWA() {
+            const name = document.getElementById('custName').value;
+            const addr = document.getElementById('custAddress').value;
+            if (!name || !addr) return alert("Nama dan Alamat wajib diisi ya kak 🙏");
+
+            // SUSUN LIST PESANAN BIAR RAPI (Pakai Loop)
+            let orderList = "";
+            let total = 0;
+            cart.forEach(item => {
+                let sub = item.price * item.qty;
+                total += sub;
+                // Format per baris: - Nama Barang (Qty Unit): Rp Harga
+                orderList += `- ${item.name} (${item.qty} ${item.unit}): Rp ${sub.toLocaleString()}\n`;
+            });
+
+            // SUSUN PESAN UTAMA (CLEAN FORMAT)
+            // Menggunakan Backtick (`) supaya bisa enter manual tanpa %0A
+            let messageText = `Halo MeClean! 👋
+
+Saya mau order laundry:
+
+👤 Nama: ${name}
+🏠 Alamat: ${addr}
+
+📝 Detail Pesanan:
+${orderList}
+💰 Total Estimasi: Rp ${total.toLocaleString()}
+
+Mohon segera dipickup ya! Terima kasih.`;
+
+            // Kirim ke WA dengan encodeURIComponent agar simbol & enter tidak error (jadi tanda tanya)
+            const phone = "6285860259244"; // GANTI NO WA DISINI
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(messageText)}`, '_blank');
+            
+            closeCheckout(); cart = []; renderCart();
+        }
+    </script>
+</body>
+</html>
